@@ -1,108 +1,193 @@
-
-
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background:#f4f6f9;
+/* RESET */
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
+/* BODY */
+body{
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+}
+
+/* HEADER */
 .header{
-    text-align:center;
-    padding:25px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    padding:20px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* LOGO */
+.logo-area{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+}
+
+.logo-area img{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    object-fit:contain;
     background:white;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
+.logo-area h2{
+    color:#fff;
+    font-weight:600;
+}
+
+/* SEARCH */
+.search-box{
+    display:flex;
+    justify-content:center;
+    margin:30px 20px;
+}
+
+.search-box form{
+    display:flex;
+    width:100%;
+    max-width:500px;
+    background:#1e293b;
+    border-radius:50px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.4);
+}
+
+.search-box input{
+    flex:1;
+    padding:15px;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:white;
+    font-size:15px;
+}
+
+.search-box input::placeholder{
+    color:#94a3b8;
+}
+
+.search-box button{
+    padding:15px 25px;
+    border:none;
+    background:#38bdf8;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.search-box button:hover{
+    background:#0ea5e9;
+}
+
+/* CONTAINER */
 .container{
-display: flex;
-flex-wrap: wrap;
-gap: 20px;
-justify-content: center;
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+    justify-content:center;
+    padding:20px;
 }
 
+/* CARD */
 .card{
-width: 220px;
-background: white;
-border-radius: 10px;
-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-overflow: hidden;
+    width: calc(20% - 25px);
+    min-width:230px;
+    background:#1e293b;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    transition:0.3s;
 }
 
 .card:hover{
-    transform:translateY(-5px);
+    transform: translateY(-8px) scale(1.03);
 }
 
+/* IMAGE */
 .card img{
-width: 100%;
-height: 180px;
-object-fit: cover;
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    transition:0.4s;
 }
 
+.card:hover img{
+    transform:scale(1.1);
+}
+
+/* BODY */
 .card-body{
-    padding:15px;
+    padding:18px;
 }
 
+/* TEXT */
 .card-body h3{
-    margin:0;
+    font-size:17px;
+    margin-bottom:8px;
 }
 
 .harga{
-    color:#e53935;
+    color:#38bdf8;
     font-weight:bold;
-    margin-top:5px;
+    font-size:18px;
 }
 
 .stok{
-    color:gray;
-    font-size:14px;
+    font-size:13px;
+    color:#94a3b8;
+    margin-top:5px;
 }
 
+/* BUTTON */
 .beli-btn{
     display:block;
     text-align:center;
-    background:#4CAF50;
+    background:#22c55e;
     color:white;
-    padding:8px;
-    border-radius:5px;
-    margin-top:10px;
+    padding:10px;
+    border-radius:8px;
+    margin-top:12px;
     text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
 }
 
 .beli-btn:hover{
-    background:#2e7d32;
+    background:#16a34a;
+    transform:scale(1.05);
 }
 
-/* ===== Desktop (default) ===== */
-.container{
-display: flex;
-flex-wrap: wrap;
-gap: 20px;
-justify-content: center;
+/* RESPONSIVE */
+@media(max-width:1024px){
+    .card{
+        width: calc(33.33% - 25px);
+    }
 }
 
-.card{
-width: 220px;
+@media(max-width:768px){
+    .card{
+        width: calc(50% - 25px);
+    }
 }
 
-/* ===== Tablet ===== */
-@media (max-width: 900px){
-.container{
-    justify-content:center;
-}
+@media(max-width:480px){
+    .card{
+        width:100%;
+    }
 
-.card{
-    width:45%;
-}
-}
+    .search-box form{
+        flex-direction:column;
+        border-radius:15px;
+    }
 
-/* ===== Phone ===== */
-@media (max-width: 600px){
-.container{
-    flex-direction: column;
-    align-items:center;
-}
-
-.card{
-    width:90%;
-}
+    .search-box button{
+        border-radius:0 0 15px 15px;
+    }
 }
