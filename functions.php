@@ -1,15 +1,12 @@
 <?php
 include "config.php";
 
+//kenapa functions.php? karena di tutorial wpu gitu
+
 function tampilProduk(){
-    global $conn;
+    global $conn; //variable global
     $result = mysqli_query($conn,"SELECT * FROM produk");
     return $result;
-}
-
-function tambahProduk($nama,$harga,$stok){
-    global $conn;
-    mysqli_query($conn,"INSERT INTO produk VALUES ('','$nama','$harga','$stok')");
 }
 
 function tambahPesanan($nama,$alamat,$produk,$jumlah){

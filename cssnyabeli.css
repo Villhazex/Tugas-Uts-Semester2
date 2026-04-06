@@ -78,3 +78,45 @@ button:hover{
 .back a:hover{
     color:black;
 }
+
+/* ===== Phone ===== */
+@media (max-width:600px){
+
+body{
+    padding:15px;
+}
+
+.container{
+    width:100%;
+    max-width:100%;
+    padding:30px 25px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+h2{
+    font-size:26px;
+}
+
+label{
+    font-size:16px;
+}
+
+input, textarea{
+    font-size:18px;
+    padding:14px;
+}
+
+textarea{
+    height:100px;
+}
+
+button{
+    font-size:20px;
+    padding:16px;
+}
+
+.back a{
+    font-size:16px;
+}
+
+}
