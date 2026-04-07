@@ -1,8 +1,6 @@
 <?php
 include "config.php";
 
-//kenapa functions.php? karena di tutorial wpu gitu
-
 function tampilProduk(){
     global $conn; //variable global
     $result = mysqli_query($conn,"SELECT * FROM produk");
