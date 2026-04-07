@@ -9,11 +9,12 @@ function tampilProduk(){
 }
 
 
+
 function tambahPesanan($nama,$alamat,$produk,$jumlah){
     global $conn;
 
     $stmt = $conn->prepare(
-        "INSERT INTO pesanan (nama,alamat,produk,jumlah,tanggal) 
+        "INSERT INTO pesanan (namapembeli,alamat,produk,jumlah,tanggal)
          VALUES (?,?,?,?,NOW())"
     );
 
@@ -22,9 +23,12 @@ function tambahPesanan($nama,$alamat,$produk,$jumlah){
 }
 
 
+
 function hitungSubtotal($harga,$jumlah){
-    return $harga * $jumlah;
+    $bentar = $harga * $jumlah;
+    return $bentar;
 }
+
 
 
 function hitungTotal($items){
