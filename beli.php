@@ -5,22 +5,22 @@ $produkDipilih = $_GET['produk'] ?? [];
 $jumlahDipilih = $_GET['jumlah'] ?? [];
 
 $items = [];
-$totalSemua = 0;
 
 foreach($produkDipilih as $i => $namaProduk){
 
     $jumlah = (int)$jumlahDipilih[$i];
     if($jumlah <= 0) continue;
 
-    // Prepared statement — aman dari SQL Injection
-    $stmt = $conn->prepare("SELECT * FROM produk WHERE namaproduk = ?");
-    $stmt->bind_param("s", $namaProduk);
+    // ambil data produk
+    $stmt = $conn->prepare("SELECT * FROM produk WHERE namaproduk=?");
+    $stmt->bind_param("s",$namaProduk);
     $stmt->execute();
     $row = $stmt->get_result()->fetch_assoc();
+
     if(!$row) continue;
 
-    $subtotal = $row['harga'] * $jumlah;
-    $totalSemua += $subtotal;
+    // hitung subtotal menggunakan function
+    $subtotal = hitungSubtotal($row['harga'],$jumlah);
 
     $items[] = [
         'nama'     => $namaProduk,
@@ -32,6 +32,10 @@ foreach($produkDipilih as $i => $namaProduk){
     ];
 }
 
+// hitung total semua
+$totalSemua = hitungTotal($items);
+
+
 if(isset($_POST['submit'])){
 
     $nama   = htmlspecialchars(trim($_POST['nama']));
@@ -39,19 +43,21 @@ if(isset($_POST['submit'])){
 
     foreach($items as $item){
 
+        // cek stok
         if($item['jumlah'] > $item['stok']){
-            echo "<script>alert('Stok tidak cukup untuk ".addslashes($item['nama'])."');</script>";
+            echo "<script>alert('Stok tidak cukup untuk ".$item['nama']."');</script>";
             exit;
         }
 
-        $stokBaru  = $item['stok'] - $item['jumlah'];
-        $namaItem  = $item['nama'];
+        // update stok
+        $stokBaru = $item['stok'] - $item['jumlah'];
 
-        $stmtUpd = $conn->prepare("UPDATE produk SET stok = ? WHERE namaproduk = ?");
-        $stmtUpd->bind_param("is", $stokBaru, $namaItem);
-        $stmtUpd->execute();
+        $stmt = $conn->prepare("UPDATE produk SET stok=? WHERE namaproduk=?");
+        $stmt->bind_param("is",$stokBaru,$item['nama']);
+        $stmt->execute();
 
-        tambahPesanan($nama, $alamat, $item['nama'], $item['jumlah']);
+        // simpan pesanan
+        tambahPesanan($nama,$alamat,$item['nama'],$item['jumlah']);
     }
 
     header("Location: success.php");
