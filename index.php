@@ -1,12 +1,10 @@
 <?php
 include "functions.php";
 
-// SEARCH
 $pencarian = "";
 
 if(isset($_GET['search']) && $_GET['search'] != ""){
     $pencarian = $_GET['search'];
-    // Prepared statement — aman dari SQL Injection
     $stmt = $conn->prepare("SELECT * FROM produk WHERE namaproduk LIKE ?");
     $like = "%$pencarian%";
     $stmt->bind_param("s", $like);
